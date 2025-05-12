@@ -15,6 +15,8 @@ if(!$conn){
 echo "Connected successfully";
 
 /*
+CRIAÇÃO DO DATABASE
+
 # Creating the database
 $sql = "CREATE DATABASE pokedex";
 if($conn->query($sql) === TRUE){
@@ -23,6 +25,8 @@ if($conn->query($sql) === TRUE){
 }else{
     echo "Error creating database: ".$conn->error;
 }
+
+//CRIAÇÃO DA TABELA POKEMON
 
 $sql = "
 CREATE TABLE pokemon(
@@ -33,7 +37,13 @@ imgurl VARCHAR(100),
 type1 VARCHAR(30),
 type2 VARCHAR(30)
 )";
-*/
+
+if($conn->query($sql) === TRUE){
+    echo "<br>";
+    echo "Database created successfully";
+}else{
+    echo "Error creating database: ".$conn->error;
+}
 
 $id = 0;
 $num = 0;
@@ -41,6 +51,8 @@ $name = "";
 $imgurl = "";
 $type1 = "";
 $type2 = "";
+
+//PASSAR O JSON PARA UM DATABASE SQL
 
 $pokedexkanto = json_decode(file_get_contents("json/pokedex.json"), true);
 
@@ -65,6 +77,7 @@ foreach($pokedexkanto["pokemons"] as $x){
         echo "Error receiving the command: ".$conn->error;
     }
 }
+*/
 
 $conn->close();
 ?>
