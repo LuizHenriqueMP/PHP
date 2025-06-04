@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
 </head>
 <body>
-    <form action="session.php">
-        
+    <form method="post" action="session_start.php">
+        <div>
+            <label for="user">User:</label>
+            <input type="text" name="user" id="user" placeholder="Type your username" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="text" name="password" id="password" placeholder="Type your password" required>
+        </div>
+        <div>
+            <input type="submit" id="button" value="Login">
+        </div>
     </form>
 </body>
 </html>
