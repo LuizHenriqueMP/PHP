@@ -3,9 +3,8 @@ session_start();
 if(!isset($_SESSION['status'])){
     header("Location: index.html");
     exit;
-
-    $_SESSION['path'] = "src/bolsonic.jpg";
 }
+
 ?>
 
 <!DOCTYPE html>
