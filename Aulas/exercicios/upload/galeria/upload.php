@@ -20,7 +20,7 @@
 <?php
 
 if(isset($_POST['galeria'])){
-    if($_POST['galeria']['value']==1){
+    if($_POST['galeria']==1){
         header("Location: gallery.html");
     }
 }
