@@ -4,6 +4,15 @@ if(!isset($_SESSION['status'])){
     header("Location: index.html");
     exit;
 }
+if(isset($_POST['botao'])){
+        if($_POST['botao']=="Trocar para Bolsonic"){
+            $_SESSION['path'] = "src/bolsonic.jpg";
+        } elseif($_POST['botao']=="Trocar para Boto Bombado"){
+            $_SESSION['path'] = "src/botinho.jpg";
+        } elseif($_POST['botao']=="Trocar para Frankenstein"){
+            $_SESSION['path'] = "src/frankstein.jfif";
+        }
+}
 
 ?>
 
@@ -26,20 +35,5 @@ if(!isset($_SESSION['status'])){
             <input type="submit" name="botao" id="frankenstein" value="Trocar para Frankenstein">
         </div>
     </form>
-    
-    <?php
-
-    if(isset($_POST['botao'])){
-        if($_POST['botao']=="Trocar para Bolsonic"){
-            $_SESSION['path'] = "src/bolsonic.jpg";
-        } elseif($_POST['botao']=="Trocar para Boto Bombado"){
-            $_SESSION['path'] = "src/botinho.jpg";
-        } elseif($_POST['botao']=="Trocar para Frankenstein"){
-            $_SESSION['path'] = "src/frankstein.jfif";
-        }
-    }
-    
-    ?>
-    
 </body>
 </html>
