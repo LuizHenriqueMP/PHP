@@ -7,21 +7,32 @@
 </head>
 <body>
     <form action="cantor.php" method="post">
-        <h2>Gosto musical</h2>
-        <label>Eu gosto de:</label>
-        <br>
-        <input type="radio" name="nacionalidade" value="nacional">Música nacional
-        <input type="radio" name="nacionalidade" value="internacional">Música internacional
+        <div>
+           <h2>Gosto musical</h2>
+            <label for="nacionalidade">Eu gosto de:</label>
+            <br>
+            <input type="radio" name="nacionalidade" value="nacional">Música nacional
+            <input type="radio" name="nacionalidade" value="internacional">Música internacional 
+        </div>
+        
+        <div>
+            <label for="tipo">Eu prefiro:</label>
+            <br>
+            <input type="radio" name="tipo" value="banda">Banda
+            <input type="radio" name="tipo" value="cantor">Cantor
+            <input type="radio" name="tipo" value="cantora">Cantora
+        </div>
 
-        <label>Eu prefiro:</label>
-        <br>
-        <input type="radio" name="tipo" value="banda">Banda
-        <input type="radio" name="tipo" value="cantor">Cantor
-        <input type="radio" name="tipo" value="cantora">Cantora
-
-        <label>Os estilos musicais que eu curto são:</label>
-        <br>
-        <input type="checkbox" name="estilo" value="nacional">
+        <div>
+            <label for="estilo">Os estilos musicais que eu curto são:</label>
+            <br>
+            <input type="checkbox" name="estilo" value="rock">Rock
+            <input type="checkbox" name="estilo" value="mpb">MPB
+            <input type="checkbox" name="estilo" value="jazz">Jazz
+            <input type="checkbox" name="estilo" value="rap">Rap
+        </div>
+    
+        <button>Que artista eu posso gostar?</button>
     </form>
 </body>
 </html>
