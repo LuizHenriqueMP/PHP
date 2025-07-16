@@ -13,7 +13,7 @@ if(isset($_GET['id'])){
 if(isset($_POST['botao'])){
     $connection = new \mysqli("localhost","root","","contatos");
 	$connection->set_charset("utf8");
-    $sql = "update pessoas set nome = '{$_POST['nome']}' ,email = '{$_POST['email']}' where id = {$_POST['id']} ";
+    $sql = "update pessoas set nome = '{$_POST['nome']}' ,email = '{$_POST['email']}',contato = '{$_POST['contato']}' where id = {$_POST['id']} ";
 	$result = $connection->query($sql);
     header("location: index.php");
 }
@@ -34,6 +34,11 @@ if(isset($_POST['botao'])){
         <br>
         <?php
             echo "E-mail: <input name='email' value={$data[0]['email']} type='email' required>";
+        ?>
+        <br>
+        <br>
+        <?php
+            echo "Contato: <input name='contato' value={$data[0]['contato']} type='text' required>";
             echo "<input name='id' value={$data[0]['id']} type='hidden'>";
         ?>
         <br>
