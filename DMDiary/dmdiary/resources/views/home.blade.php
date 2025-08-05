@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
-    <link rel="stylesheet" href="C:\xampp\htdocs\PHP\DMDiary\dmdiary\resources\css\style.css">
+    <link rel="stylesheet" href="DMDiary/dmdiary/resources/css/style.css">
 </head>
 <body>
     <section class="sidebar">
@@ -13,12 +13,13 @@
         $texto = json_decode(file_get_contents("C:/xampp/htdocs/PHP/DMDiary/dmdiary/storage/app/json_files/text.json"), true);
 
         foreach($texto['texto'] as $x){
-            echo $x['titulo'];
+            echo "<input type='submit' value={$x['titulo']}>";
         }
+
 
         ?>
     </section>
-    <section>
+    <section class="main">
         <div>
         <?php
         $texto = json_decode(file_get_contents("C:/xampp/htdocs/PHP/DMDiary/dmdiary/storage/app/json_files/text.json"), true);
@@ -32,7 +33,7 @@
 
         ?>
         </div>
-        <div style="border: 3px solid black;">
+        <div>
             <form action="/escrever" method="POST">
                 @csrf
                 <div>
