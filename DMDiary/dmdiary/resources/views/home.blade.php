@@ -5,47 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
-    <link rel="stylesheet" href="DMDiary/dmdiary/resources/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" >
 </head>
 <body>
     <section class="sidebar">
         <?php
         $texto = json_decode(file_get_contents("C:/xampp/htdocs/PHP/DMDiary/dmdiary/storage/app/json_files/text.json"), true);
+        $texto_exist = isset($texto['texto'][0]['titulo']);
 
-        foreach($texto['texto'] as $x){
-            echo "<input type='submit' value={$x['titulo']}>";
+        if($texto_exist){
+            foreach($texto['texto'] as $x){
+                echo "<input type='submit' value={$x['titulo']}>";
+            }
         }
-
-
+        
+        
         ?>
+        <form action="/criar" method="post">
+            @csrf
+
+            <div>
+                <input type="text" name="titulo" id="titulo" placeholder="Título">
+            </div>
+            <div>
+                <input type="submit" name="criar" value="Criar">
+            </div>
+        </form>
     </section>
     <section class="main">
         <div>
         <?php
         $texto = json_decode(file_get_contents("C:/xampp/htdocs/PHP/DMDiary/dmdiary/storage/app/json_files/text.json"), true);
-
-        foreach($texto['texto'] as $x){
-            echo " <h1> {$x['titulo']} </h1>";
-            echo "<br>";
-            echo $x['descricao'];
-            echo "<hr>";
+        
+        if($texto_exist){
+            foreach($texto['texto'] as $x){
+                echo " <h1> {$x['titulo']} </h1>";
+                echo "<br>";
+                echo $x['descricao'];
+                echo "<hr>";
+            }
+        }else{
+            echo "<h1>Bem vindo ao Diario do Mestre!!!</h1>";
         }
+        
 
         ?>
         </div>
         <div>
             <form action="/escrever" method="POST">
                 @csrf
-                <div>
-                    <input type="text" name="titulo" id="titulo" placeholder="título">
-                </div>
-                <br>
-                <div>
-                    <input type="text" name="descricao" id="descricao" placeholder="descrição">
-                </div>
-                <div>
-                    <input type="submit" name="escrever" value="Escrever">
-                </div>
+                <?php
+
+                if($texto_exist){
+                    if($texto['texto'][0]['descricao'] == ""){
+                        echo "
+                        <div>
+                            <input type='text' name='descricao' id='descricao' placeholder='Descrição'>
+                        </div>
+                        ";
+                    }
+                    echo "
+                        <div>
+                            <input type='text' name='subtitulo' id='subtitulo' placeholder='Subtítulo'>
+                        </div>
+                        <br>
+                        <div>
+                            <input type='text' name='subdescricao' id='subdescricao' placeholder='Descrição'>
+                        </div>
+                        <br>
+                        <div>
+                            <input type='submit' name='escrever' value='Escrever'>
+                        </div>
+                    ";
+                }
+                ?>
             </form>
         </div>
     </section>

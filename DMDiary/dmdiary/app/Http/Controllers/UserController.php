@@ -9,7 +9,21 @@ class UserController extends Controller
     public function escrever(){
         $texto = json_decode(file_get_contents("C:/xampp/htdocs/PHP/DMDiary/dmdiary/storage/app/json_files/text.json"), true);
         
-        $texto['texto'][count($texto['texto']) - 1] = array('titulo' => $_POST['titulo'], 'descricao' => $_POST['descricao']);
+        if($texto['texto'][count($texto['texto'])]['descricao'] == ""){
+            $texto['texto'][count($texto['texto'])] = ['descricao' => $_POST['descricao'], "aspectos" => ["subtitulo" => $_POST['subtitulo'], "subdescricao" => $_POST['subdescricao']]];
+        }else{
+            $texto['texto'][count($texto['texto'])] = ["aspectos" => ["subtitulo" => $_POST['subtitulo'], "subdescricao" => $_POST['subdescricao']]];
+        }
+
+        file_put_contents("C:/xampp/htdocs/PHP/DMDiary/dmdiary/storage/app/json_files/text.json", json_encode($texto, JSON_PRETTY_PRINT));
+
+        return redirect('/');
+    }
+
+    public function criar(){
+        $texto = json_decode(file_get_contents("C:/xampp/htdocs/PHP/DMDiary/dmdiary/storage/app/json_files/text.json"), true);
+
+        $texto['texto'][count($texto['texto'])] = ['titulo' => $_POST['titulo'], 'descricao' => "", "aspectos" => ["subtitulo" => "", "subdescricao" => ""]];
 
         file_put_contents("C:/xampp/htdocs/PHP/DMDiary/dmdiary/storage/app/json_files/text.json", json_encode($texto, JSON_PRETTY_PRINT));
 

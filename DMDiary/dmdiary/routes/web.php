@@ -8,6 +8,8 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::post('/criar', [UserController::class, 'criar']);
+
 Route::post('/escrever', [UserController::class, 'escrever']);
 
 Route::middleware(['auth', 'verified'])->group(function () {
