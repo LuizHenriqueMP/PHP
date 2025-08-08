@@ -13,7 +13,7 @@
         $texto = json_decode(file_get_contents("C:/xampp/htdocs/PHP/DMDiary/dmdiary/storage/app/json_files/text.json"), true);
         $texto_exist = isset($texto['texto'][0]['titulo']);
 
-        if($texto_exist){
+        if(isset($texto['texto'][0]['titulo'])){
             foreach($texto['texto'] as $x){
                 echo "<input type='submit' value={$x['titulo']}>";
             }
@@ -37,7 +37,7 @@
         <?php
         $texto = json_decode(file_get_contents("C:/xampp/htdocs/PHP/DMDiary/dmdiary/storage/app/json_files/text.json"), true);
         
-        if($texto_exist){
+        if($texto_exist == true){
             foreach($texto['texto'] as $x){
                 echo " <h1> {$x['titulo']} </h1>";
                 echo "<br>";
