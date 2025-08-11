@@ -43,6 +43,12 @@
                 echo "<br>";
                 echo $x['descricao'];
                 echo "<hr>";
+                foreach ($x['aspectos'] as $y => $value) {
+                    echo " <h2> {$value['subtitulo']} </h2>";
+                    echo "<br>";
+                    echo $value['subdescricao'];
+                    echo "<hr>";
+                }
             }
         }else{
             echo "<h1>Bem vindo ao Diario do Mestre!!!</h1>";
