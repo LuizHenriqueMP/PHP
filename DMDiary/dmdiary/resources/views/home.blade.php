@@ -9,18 +9,29 @@
 </head>
 <body>
     <section class="sidebar">
-        <?php
-        $texto = json_decode(file_get_contents("C:/xampp/htdocs/PHP/DMDiary/dmdiary/storage/app/json_files/text.json"), true);
-        $texto_exist = isset($texto['texto'][0]['titulo']);
+        <form action="/" method="POST">
+            @csrf
+            <?php
 
-        if(isset($texto['texto'][0]['titulo'])){
+            $texto = json_decode(file_get_contents("C:/xampp/htdocs/PHP/DMDiary/dmdiary/storage/app/json_files/text.json"), true);
+            $texto_exist = isset($texto['texto'][0]['titulo']);
+            $indexSelect = 0;
+
             foreach($texto['texto'] as $x){
-                echo "<input type='submit' value={$x['titulo']}>";
+                if($x['titulo'] == $_POST['selecionado']){
+                    $indexSelect = $x;
+                }
             }
-        }
+            
+            if(isset($texto['texto'][0]['titulo'])){
+                foreach($texto['texto'] as $x){
+                    echo "<input type='submit' value={$x['titulo']} name='selecionado' >";
+                }
+            }
+            $texto_selected = isset($_POST['selecionado']);
+            ?>
+        </form>
         
-        
-        ?>
         <form action="/criar" method="post">
             @csrf
 
@@ -39,16 +50,17 @@
         
         if($texto_exist == true){
             foreach($texto['texto'] as $x){
-                echo " <h1> {$x['titulo']} </h1>";
-                echo "<br>";
-                echo $x['descricao'];
-                echo "<hr>";
-                foreach ($x['aspectos'] as $y => $value) {
-                    echo " <h2> {$value['subtitulo']} </h2>";
+                if($x['titulo'] == $_POST['selecionado'])
+                    echo " <h1> {$x['titulo']} </h1>";
                     echo "<br>";
-                    echo $value['subdescricao'];
+                    echo $x['descricao'];
                     echo "<hr>";
-                }
+                    foreach ($x['aspectos'] as $y => $value) {
+                        echo " <h2> {$value['subtitulo']} </h2>";
+                        echo "<br>";
+                        echo $value['subdescricao'];
+                        echo "<hr>";
+                    }
             }
         }else{
             echo "<h1>Bem vindo ao Diario do Mestre!!!</h1>";
@@ -62,7 +74,7 @@
                 @csrf
                 <?php
 
-                if($texto_exist){
+                if($texto_selected == true){
                     if($texto['texto'][0]['descricao'] == ""){
                         echo "
                         <div>
