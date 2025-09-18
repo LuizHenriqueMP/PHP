@@ -5,7 +5,6 @@ require_once __DIR__."\..\bd\MySQL.php";
 class Usuario{
 
     private int $idUsuario;
-    private bool $votou;
     
     public function __construct(private string $email,private string $senha){
     }
@@ -33,22 +32,11 @@ class Usuario{
     public function getEmail():string{
         return $this->email;
     }
-    public function setVotou(string $votou):void{
-        $this->votou = $votou;
-    }
-
-    public function getVotou():bool{
-        return $this->votou;
-    }
 
     public function save():bool{
         $conexao = new MySQL();
         $this->senha = password_hash($this->senha,PASSWORD_BCRYPT); 
-        if(isset($this->idUsuario)){
-            $sql = "UPDATE usuarios SET votou = '{$this->votou}' WHERE id = {$this->idUsuario}";
-        }else{
-            $sql = "INSERT INTO usuarios (email,senha,votou) VALUES ('{$this->email}','{$this->senha}','{$this->votou}')";
-        }
+        $sql = "INSERT INTO usuarios (email,senha) VALUES ('{$this->email}','{$this->senha}')";
         return $conexao->executa($sql);
     }
 
