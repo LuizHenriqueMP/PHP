@@ -1,13 +1,8 @@
 <?php
 if(isset($_POST['botao'])){
-    if(($_POST['usuario'] == "admin") && ($_POST['senha'] == 123) ){
-        header("location: homepage.php");
-    }else{
-        header("location: index.php");
-    }
+    header("location: homepage.php");
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,19 +11,14 @@ if(isset($_POST['botao'])){
     <title>Document</title>
 </head>
 <body>
+    <div>
+        <h1>Bem vindo usuário!!!</h1>
+    </div>
     <form action="index.php" method="post">
-        <div>
-            <label for="usuario">Usuario:</label>
-            <input type="text" name="usuario" id="usuario">
-        </div>
-        
-        <div>
-            <label for="senha">Senha:</label>
-            <input type="password" name="senha" id="senha">
-        </div>
-        <div>
-            <input type="submit" value="Entrar" name="botao" id="botao">
-        </div>
+        <input type="submit" name="botao" value="Entrar no sistema">
     </form>
+    <div>
+        <a href="adm_login.php">Sou administrador</a>
+    </div>
 </body>
 </html>
