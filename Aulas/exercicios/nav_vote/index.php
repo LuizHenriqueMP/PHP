@@ -1,9 +1,10 @@
 <?php
 if(isset($_POST['botao'])){
     require_once __DIR__."\classes\Usuario.php";
+    require_once __DIR__."\classes\Voto.php";
     $u = new Usuario($_POST['email'],$_POST['senha']);
     if($u->authenticate()){
-        if($u->getVotou()){
+        if(Voto::Votou()){
             header("location: resultado.php");
         }else{
             header("location: votacao.php");
