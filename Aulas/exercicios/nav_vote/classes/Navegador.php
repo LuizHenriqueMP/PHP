@@ -9,6 +9,14 @@ class Navegador{
     public function __construct(private string $nome, private string $url){
     }
 
+    public function setId(int $idNavegador):void{
+        $this->idNavegador = $idNavegador;
+    }
+
+    public function getId():int{
+        return $this->idNavegador;
+    }
+
     public function getNome():string{
         return $this->nome;
     }
@@ -36,10 +44,10 @@ class Navegador{
         $resultados = $conexao->consulta($sql);
         $navegadores = array();
         foreach($resultados as $resultado){
-            $n = new Navegador($resultado['nome'],$resultado['url'], $resultado['empresa'], $resultado['visivel']);
-            $v->setId($resultado['id']);
-            $vagas[] = $v;
+            $n = new Navegador($resultado['nome'],$resultado['url_foto']);
+            $n->setId($resultado['id']);
+            $navegadores[] = $n;
         }
-        return $vagas;
+        return $navegadores;
     }
 }

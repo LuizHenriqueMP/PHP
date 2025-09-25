@@ -38,7 +38,6 @@ class Voto{
 
     public function save():bool{
         $conexao = new MySQL();
-        $this->senha = password_hash($this->senha,PASSWORD_BCRYPT); 
         $sql = "INSERT INTO votos (idUsuario,idNav) VALUES ('{$this->idUsuario}','{$this->idNav}')";
         return $conexao->executa($sql);
     }
