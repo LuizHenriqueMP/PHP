@@ -1,11 +1,22 @@
 <?php
-
+session_start();
 require_once __DIR__."\classes\Usuario.php";
 require_once __DIR__."\classes\Navegador.php";
-$u = new Usuario($_SESSION['email'], "");
+require_once __DIR__."\classes\Voto.php";
+$u = new Usuario($_SESSION['email'], $_SESSION['senha']);
 $navegadores = Navegador::findall();
-$nav = new Navegador($_POST['nav'] ,$_POST['imagem']);
 
+if(isset($_POST['botao'])){
+    $nav = new Navegador($_POST['nav'] ,"");
+    foreach($navegadores as $n){
+        if($n->getNome()==$_POST['nav']){
+            $nav->setId($n->getId());
+        }
+    }
+    $voto = new Voto($_SESSION['idUsuario'], $nav->getId());
+    $voto->save();
+    header("Location: resultado.php");
+}
 ?>
 
 <!DOCTYPE html>

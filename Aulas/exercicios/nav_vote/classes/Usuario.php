@@ -42,12 +42,13 @@ class Usuario{
 
     public function authenticate():bool{
         $conexao = new MySQL();
-        $sql = "SELECT id,email FROM usuarios WHERE email = '{$this->email}'";
+        $sql = "SELECT id,email,senha FROM usuarios WHERE email = '{$this->email}'";
         $resultados = $conexao->consulta($sql);
         if(password_verify($this->senha,$resultados[0]['senha'])){
             session_start();
             $_SESSION['idUsuario'] = $resultados[0]['id'];
             $_SESSION['email'] = $resultados[0]['email'];
+            $_SESSION['senha'] = $resultados[0]['senha'];
             return true;
         }else{
             return false;
