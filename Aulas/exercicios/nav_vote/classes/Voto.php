@@ -9,6 +9,14 @@ class Voto{
     public function __construct(private int $idUsuario,private int $idNav){
     }
 
+    public function setId(int $idVoto):void{
+        $this->idVoto = $idVoto;
+    }
+
+    public function getIdVoto():int{
+        return $this->idVoto;
+    }
+
     public function setIdUsuario(int $idUsuario):void{
         $this->idUsuario = $idUsuario;
     }
@@ -40,5 +48,18 @@ class Voto{
         $conexao = new MySQL();
         $sql = "INSERT INTO votos (idUsuario,idNav) VALUES ('{$this->idUsuario}','{$this->idNav}')";
         return $conexao->executa($sql);
+    }
+
+    public static function findall():array{
+        $conexao = new MySQL();
+        $sql = "SELECT * FROM votos";
+        $resultados = $conexao->consulta($sql);
+        $votos = array();
+        foreach($resultados as $resultado){
+            $v = new Voto($resultado['idUsuario'],$resultado['idNav']);
+            $v->setId($resultado['idVoto']);
+            $votos[] = $v;
+        }
+        return $votos;
     }
 }
