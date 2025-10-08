@@ -21,10 +21,6 @@ class Navegador{
         return $this->nome;
     }
 
-    public function getIdNavegador():int{
-        return $this->idNavegador;
-    }
-
     public function getURL():string{
         return $this->url;
     }
@@ -33,8 +29,8 @@ class Navegador{
         $conexao = new MySQL();
         $sql = "SELECT * FROM navegadores WHERE id = {$idNavegador}";
         $resultado = $conexao->consulta($sql);
-        $n = new Navegador($resultado[0]['nome'],$resultado[0]['url']);
-        $n->setIdNavegador($resultado[0]['id']);
+        $n = new Navegador($resultado[0]['nome'],$resultado[0]['url_foto']);
+        $n->setId($resultado[0]['id']);
         return $n;
     }
 

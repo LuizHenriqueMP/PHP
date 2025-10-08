@@ -1,0 +1,69 @@
+/* Styles for nav_vote app */
+:root{
+    --bg:#0f1724;
+    --card:#0b1220;
+    --accent:#06b6d4;
+    --muted:#94a3b8;
+    --glass: rgba(255,255,255,0.03);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    background: linear-gradient(180deg,var(--bg) 0%, #071025 100%);
+    color: #eef2ff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:32px;
+}
+.container{
+    max-width:980px;
+    margin:0 auto;
+}
+header h1{font-size:2rem;margin-bottom:18px;color:var(--accent)}
+.card{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.03);
+    padding:20px;
+    border-radius:10px;
+    box-shadow: 0 6px 20px rgba(2,6,23,0.6);
+}
+form{ display:block }
+form > div{ margin-bottom:14px }
+label{ display:block; margin-bottom:6px; color:var(--muted); font-size:0.95rem }
+input[type="text"], input[type="password"], button{
+    font-size:1rem; padding:10px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.04);
+}
+input[type="text"], input[type="password"]{ width:100%; background:transparent; color:inherit }
+button{
+    background: linear-gradient(90deg,var(--accent), #7dd3fc);
+    color:#022; font-weight:700; border:none; cursor:pointer; transition:transform .12s ease, box-shadow .12s ease;
+}
+button:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(3,105,161,0.18) }
+a{ color:var(--accent); text-decoration:none }
+
+.grid{
+    display:grid; gap:12px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+.nav-item{ display:flex; align-items:center; gap:12px; padding:12px; border-radius:8px; background:var(--glass); border:1px solid rgba(255,255,255,0.02) }
+.nav-item img{ width:96px; height:96px; object-fit:cover; border-radius:8px; border:1px solid rgba(255,255,255,0.04) }
+.nav-item .meta{ flex:1 }
+.nav-item .meta h3{ margin:0 0 6px 0; font-size:1.05rem }
+.nav-item .meta p{ margin:0; color:var(--muted); font-size:0.92rem }
+
+.radio{ display:flex; align-items:center; gap:8px }
+input[type="radio"]{ width:18px; height:18px }
+
+.results{ display:flex; flex-direction:column; gap:10px }
+.result-row{ display:flex; align-items:center; gap:12px; padding:10px; border-radius:8px; background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.03) }
+.result-row label{ font-weight:700; color:#fff }
+
+.small{ font-size:0.9rem; color:var(--muted) }
+
+@media (max-width:520px){
+    .nav-item{ flex-direction:column; align-items:flex-start }
+    .nav-item img{ width:100%; height:160px }
+}
+
+/* neat focus styles for accessibility */
+input:focus, button:focus{ outline:3px solid rgba(6,182,212,0.14); outline-offset:2px }

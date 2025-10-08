@@ -1,9 +1,14 @@
 <?php
 session_start();
-if(isset($_SESSION['idUsuario'])){
+if(!isset($_SESSION['idUsuario'])){
     header("Location: login.php");
 }
-require_once __DIR__."/classes/Usuario.php";
+
+if(isset($_GET['idItem'])){
+    require_once __DIR__."/classes/Item.php";
+    Item::mudaStatus($_GET['idItem']);
+}
+
 require_once __DIR__."/classes/Item.php";
 $itens = Item::findall();
 
@@ -21,11 +26,20 @@ $itens = Item::findall();
     <?php
         foreach($itens as $item){
             if($item->status == 1){
+                echo "{$item->descricao} - {$item->local} - {$item->data} <a href='restrita.php?idItem={$item->idItem}'>Alterar status</a>";
+                echo "<br>";
+            }
+        }
+    ?>
+    <h1>Itens Achados</h1>
+    <?php
+        foreach($itens as $item){
+            if($item->status == 0){
                 echo "{$item->descricao} - {$item->local} - {$item->data}";
                 echo "<br>";
             }
         }
     ?>
-    <a href="login.php">Login</a>
+    <a href="formCadItem.php">Cadastrar Item</a>
 </body>
 </html>

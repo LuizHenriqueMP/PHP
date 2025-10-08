@@ -24,31 +24,38 @@ if(isset($_POST['botao'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Votação</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>votacao</h1>
+    <div class="container">
+    <header style="margin-bottom:16px"><h1>Votação</h1></header>
+    <main class="card">
     <form action="votacao.php" method="post">
         <div>
             <label for="nav">Eu prefiro:</label>
         </div>
-        <div>
+        <div class="grid">
             <?php
                 foreach($navegadores as $n){
                     echo '
-                    <div>
-                        <picture for="nav">
-                            <img name="imagem" src="'. $n->getUrl() .'" alt="Imagem não encontrada">
-                        </picture>
-                        <input type="radio" name="nav" value="'. $n->getNome() .'">'.$n->getNome() .'
-                    </div>
-                    ';
+                        <label class="nav-item">
+                        <img src="'. $n->getUrl() .'" alt="'.htmlspecialchars($n->getNome()).'">
+                        <div class="meta">
+                        <h3>'.htmlspecialchars($n->getNome()).'</h3>
+                        </div>
+                        <div class="radio">
+                        <input type="radio" name="nav" value="'. htmlspecialchars($n->getNome()) .'">
+                        </div>
+                        </label>';
                 }
             ?>
         </div>
-        <div>
+        <div style="margin-top:12px">
             <button name="botao">Enviar</button>
         </div>
     </form>
+    </main>
+    </div>
 </body>
 </html>

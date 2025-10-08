@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18/09/2025 às 20:04
+-- Tempo de geração: 08/10/2025 às 14:10
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -53,16 +53,40 @@ INSERT INTO `navegadores` (`id`, `nome`, `url_foto`, `votos`) VALUES
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `senha` varchar(255) NOT NULL,
-  `votou` tinyint(1) NOT NULL
+  `senha` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `email`, `senha`, `votou`) VALUES
-(1, 'paul@lo.com', '$2y$10$TeRPwyz/xWQBv.fKThxiv.wy1Vu4T3DO6wovVFcoQmfJtyBGdJX0C', 1);
+INSERT INTO `usuarios` (`id`, `email`, `senha`) VALUES
+(1, 'paul@lo.com', '$2y$10$TeRPwyz/xWQBv.fKThxiv.wy1Vu4T3DO6wovVFcoQmfJtyBGdJX0C'),
+(2, 'luiz@luiz.com', '$2y$10$Hj7Bwe9LN7buq5hxLBymf.tMBlOAr0n0jecxkmTRpZbruDl8XOqdy'),
+(3, 'luiz@gmail.com', '$2y$10$XoEXjz7gHSLCs22j2.T5gu.rbxKF8mUP7fWMLDxFHCymlR1Sf9gqK'),
+(4, 'mateus@bino', '$2y$10$N7iApYduNy7Mf.v91qFJ4OBniGWROLxdTTx2ylFeIyBdToke1BC1C');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `votos`
+--
+
+CREATE TABLE `votos` (
+  `idVoto` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idNav` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `votos`
+--
+
+INSERT INTO `votos` (`idVoto`, `idUsuario`, `idNav`) VALUES
+(1, 2, 1),
+(2, 1, 1),
+(3, 3, 4),
+(4, 4, 1);
 
 --
 -- Índices para tabelas despejadas
@@ -81,6 +105,14 @@ ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `votos`
+--
+ALTER TABLE `votos`
+  ADD PRIMARY KEY (`idVoto`),
+  ADD KEY `idUsuario` (`idUsuario`),
+  ADD KEY `idNav` (`idNav`);
+
+--
 -- AUTO_INCREMENT para tabelas despejadas
 --
 
@@ -94,7 +126,24 @@ ALTER TABLE `navegadores`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `votos`
+--
+ALTER TABLE `votos`
+  MODIFY `idVoto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Restrições para tabelas despejadas
+--
+
+--
+-- Restrições para tabelas `votos`
+--
+ALTER TABLE `votos`
+  ADD CONSTRAINT `votos_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `votos_ibfk_2` FOREIGN KEY (`idNav`) REFERENCES `navegadores` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

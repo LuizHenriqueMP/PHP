@@ -62,4 +62,20 @@ class Voto{
         }
         return $votos;
     }
+
+    public static function findWinner():array{
+        $conexao = new MySQL();
+        // Use LEFT JOIN to include navegadores with zero votes
+        $sql = "SELECT n.id, COUNT(v.idUsuario) AS votes
+                FROM navegadores n
+                LEFT JOIN votos v ON v.idNav = n.id
+                GROUP BY n.id
+                ORDER BY votes DESC";
+        $resultados = $conexao->consulta($sql);
+        $votos = array();
+        foreach($resultados as $resultado){
+            $votos += [$resultado['id'] => $resultado['votes']];
+        }
+        return $votos;
+    }
 }
